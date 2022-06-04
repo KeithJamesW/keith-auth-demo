@@ -1,7 +1,7 @@
 """Flask app for adopt app."""
 
 from flask import Flask, url_for, render_template, redirect, flash, jsonify
-
+import os
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, Pet
@@ -9,8 +9,8 @@ from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = "abcdef"
-
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'hellosecret1')
+print(app.config["SECRET_KEY"])
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///adopt"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
